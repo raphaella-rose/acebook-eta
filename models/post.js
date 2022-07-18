@@ -7,7 +7,10 @@ const PostSchema = new mongoose.Schema({
   message: String,
   likes: Number,
   timestamp: Date,
-
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
 });
 
 const Post = mongoose.model("Post", PostSchema);
