@@ -17,12 +17,17 @@
         <input type="hidden" name="id" value={{this._id}} />
         <input type="submit" value="Delete" />
       </form>
-      <a href='/posts/upload'>Add an image</a><br>
       <div class="likes">Likes: {{this.likes}}</div>
       <form class="like-post" action="/posts/like" method="post">
         <input type="hidden" name="id" value={{this._id}} />
         <input type="submit" value="like" />
       </form>
+       <a href='/posts/upload'>Add an image</a><br>
+       <div class="post-image">
+       {{#if this.flashMessage}}
+       <img src="../public/uploads/{{this.flashMessage}}" class="image"/>
+       {{/if}}
+       </div>
     </li>
   {{/each}}
 </ul>

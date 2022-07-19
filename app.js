@@ -5,11 +5,13 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const session = require("express-session");
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
 
 const homeRouter = require("./routes/home");
 const postsRouter = require("./routes/posts");
 const sessionsRouter = require("./routes/sessions");
 const usersRouter = require("./routes/users");
+const ImagesRouter = require("./routes/images");
 
 const app = express();
 
@@ -53,11 +55,21 @@ const sessionChecker = (req, res, next) => {
   }
 };
 
+// implement connect-flash module
+app.use(flash());
+
 // route setup
 app.use("/", homeRouter);
 app.use("/posts", sessionChecker, postsRouter);
+app.use("/post", sessionChecker, ImagesRouter);
 app.use("/sessions", sessionsRouter);
 app.use("/users", usersRouter);
+
+// load all images in the uploads file
+app.use(
+  "/images",
+  express.static(path.join(__dirname, "/views/posts/upload.hbs"))
+);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -74,5 +86,10 @@ app.use((err, req, res) => {
   res.status(err.status || 500);
   res.render("error");
 });
+
+app.use(
+  "/images",
+  express.static(path.join(__dirname, "/views/posts/upload.hbs"))
+);
 
 module.exports = app;
