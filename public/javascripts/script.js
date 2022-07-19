@@ -1,8 +1,12 @@
-let likeCount = document.querySelector('.likes');
+let likes = document.querySelector('.likes');
+let likeButton = document.querySelector('likeButton');
 
-const likeFunction = () => {
+let likeCount = 0;
+
+const likeFunction = (e) => {
   likeCount += 1;
-  console.log(likeCount)
+  likes.innerHTML = likeCount;
+  console.log(e)
+  // console.log(like)
+  
 }
-
-

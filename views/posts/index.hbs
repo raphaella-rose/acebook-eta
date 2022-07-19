@@ -20,11 +20,13 @@
         <input type="submit" value="Delete" />
       </form>
       {{#if this.likes}}
-      <div class="likes">Likes: {{this.likes}}</div>
-      {{/if}}
-      <button id="likeButton" onclick="likeFunction()" type="button">like-button</button>
+      {{!-- <div class="likes">Likes: {{this.likes}}</div> --}}
 
-      
+      {{/if}}
+      <div>
+        <button class="likeButton" onclick="likeFunction()" id="{{ this.id }}" type="button">like-button</button>
+        <div class="likes" id="likes-count-{{ this.id }}">Likes: {{likeCount}}</div>
+      </div>
       {{!-- <form class="like-post" action="/posts/like" method="post">
         <input type="hidden" name="id" value={{this._id}} />
         <input type="submit" value="like" />
