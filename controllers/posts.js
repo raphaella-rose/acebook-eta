@@ -47,7 +47,7 @@ const PostsController = {
     Post.updateOne({_id: id}, { $inc: { likes: 1 }}, (err) => {
       if (err) {
         throw err;
-      }
+      }   
       res.redirect("/posts");
     })
    
