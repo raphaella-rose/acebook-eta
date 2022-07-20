@@ -17,9 +17,15 @@
       {{this.message}}
       <br>
       {{!-- Image button and Image --}}
-      <button id="add-image-btn" type="button">Add an image</button>
-      <img id="image" src="https://images.unsplash.com/photo-1527206363095-ca2f054128b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2874&q=80" alt="Beach view with a drink on a table" width="400" height="400"/>
-     
+      <button id="add-image-btn" type="button" onclick="show()">Add an image</button>
+      <img id="image" style="display:none;" src="https://images.unsplash.com/photo-1527206363095-ca2f054128b0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2874&q=80" alt="Beach view with a drink on a table" width="400" height="400"/>
+      <script> 
+        show = () => {
+          document.getElementById("image").style.display = "block";
+          document.getElementById("add-image-btn").style.display = "none"
+      }
+      </script>
+
       <form class="delete-post" action="/posts/delete" method="post">
         <input type="hidden" name="id" value={{this._id}} />
         <input type="submit" value="Delete" />
