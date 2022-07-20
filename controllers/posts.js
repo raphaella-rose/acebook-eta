@@ -56,7 +56,7 @@ const PostsController = {
         if (err) {
           throw err;
         }
-        res.json({likes: post.likes})
+        res.json({ likes: post.likes });
       });
     });
   },

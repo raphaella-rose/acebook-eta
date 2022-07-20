@@ -12,10 +12,13 @@ const ProfileController = {
       if (err) {
         throw err;
       }
-      res.render("profile/userProfile", { posts: userPosts.reverse(), name: username, title: "Profile Page"});
-    }
-    )
-  }
-}
+      res.render("profile/userProfile", {
+        posts: userPosts.reverse(),
+        name: username,
+        title: "Profile Page",
+      });
+    });
+  },
+};
 
-module.exports = ProfileController
+module.exports = ProfileController;
