@@ -19,14 +19,16 @@
         <input type="hidden" name="id" value={{this._id}} />
         <input type="submit" value="Delete" />
       </form>
-      {{#if this.likes}}
-      {{!-- <div class="likes">Likes: {{this.likes}}</div> --}}
-
-      {{/if}}
       <div>
         <button class="likeButton" onclick="likeFunction('{{this.id}}')" type="button">like-button</button>
         <div>Likes: <span class="likes" id="likes-{{ this.id }}"></span></div>
       </div>
+      
+      {{#if this.likes}}
+      {{!-- <div class="likes">Likes: {{this.likes}}</div> --}}
+
+      {{/if}}
+      
       {{!-- <form class="like-post" action="/posts/like" method="post">
         <input type="hidden" name="id" value={{this._id}} />
         <input type="submit" value="like" />
