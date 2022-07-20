@@ -5,7 +5,7 @@ describe("Profile Page", () => {
     cy.task("dropUsers");
   });
 
-  it("Profile page displays username", () => {
+  it.skip("Profile page displays username", () => {
     // run webhelper to sign up and sign in to acebook
     signUpAndSignIn();
 
@@ -17,7 +17,7 @@ describe("Profile Page", () => {
     cy.contains("CypressTestUser");
   });
 
-  it("displays detailed information (dob, location, full name) about user", () => {
+  it.skip("displays detailed information (dob, location, full name) about user", () => {
     // run webhelper to sign up and sign in to acebook
     signUpAndSignIn();
 
@@ -30,7 +30,11 @@ describe("Profile Page", () => {
     cy.contains("11 June 1999");
   });
 
+<<<<<<< Updated upstream
   it("Displays posts made by user", () => {
+=======
+  it.skip("Displays posts made by user", () => {
+>>>>>>> Stashed changes
     // sign up, sign in, and make post as different user
     cy.visit("/users/new");
     cy.get("#username").type("AnotherTestUser");
