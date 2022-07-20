@@ -6,7 +6,7 @@ describe("Timeline", () => {
     cy.task("dropUsers");
   });
 
-  it.skip("displays posts most recent first", () => {
+  it("displays posts most recent first", () => {
     // run webhelper to sign up and sign in to acebook
     signUpAndSignIn();
 
