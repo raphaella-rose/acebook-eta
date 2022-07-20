@@ -5,8 +5,8 @@ let likeCount = 0;
 
 const likeFunction = (e) => {
   likeCount += 1;
-  likes.innerHTML = likeCount;
-  console.log(e)
+  // likes.innerHTML = likeCount;
+  console.log(likeCount)
   // console.log(like)
   
 }
