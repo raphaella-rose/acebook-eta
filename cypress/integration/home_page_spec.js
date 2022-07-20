@@ -15,5 +15,4 @@ describe("Home page", () => {
     cy.contains("Sign In").click();
     cy.url().should("include", "/sessions/new");
   });
-  
 });
