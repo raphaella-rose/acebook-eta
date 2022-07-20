@@ -24,8 +24,8 @@
 
       {{/if}}
       <div>
-        <button class="likeButton" onclick="likeFunction()" id="{{ this.id }}" type="button">like-button</button>
-        <div>Likes: <span class="likes" id="likes-count-{{ this.id }}"></span></div>
+        <button class="likeButton" onclick="likeFunction('{{this.id}}')" type="button">like-button</button>
+        <div>Likes: <span class="likes" id="likes-{{ this.id }}"></span></div>
       </div>
       {{!-- <form class="like-post" action="/posts/like" method="post">
         <input type="hidden" name="id" value={{this._id}} />
