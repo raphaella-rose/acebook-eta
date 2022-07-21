@@ -6,7 +6,11 @@ const PostsController = {
       if (err) {
         throw err;
       }
-      res.render("posts/index", { posts: posts.reverse() });
+
+      res.render("posts/index", {
+        posts: posts.reverse(),
+        user: req.session.user,
+      });
     });
   },
   New: (req, res) => {
@@ -16,6 +20,8 @@ const PostsController = {
     const ObjectId = require("mongodb").ObjectId;
     const id = ObjectId(req.session.user._id);
     const username = req.session.user.username;
+    const image = req.body.imageUrl;
+
 
     const datePosted = new Date().toLocaleDateString("en-GB");
     const timePosted = new Date().toLocaleTimeString([], {
@@ -26,8 +32,11 @@ const PostsController = {
       userId: id,
       username: username,
       message: req.body.message,
-      likes: 0,
+      likes: [],
       timestamp: `${datePosted} ${timePosted}`,
+      image: image,
+      comments: []
+
     });
 
     post.save((err) => {
@@ -50,16 +59,60 @@ const PostsController = {
   },
   Like: (req, res) => {
     const ObjectId = require("mongodb").ObjectId;
-    const id = new ObjectId(req.body.id);
-    Post.updateOne({ _id: id }, { $inc: { likes: 1 } }, () => {
-      Post.findOne({ _id: id }, (err, post) => {
-        if (err) {
-          throw err;
-        }
-        res.json({ likes: post.likes });
-      });
+    const postId = new ObjectId(req.body.id);
+    const likingUserId = new ObjectId(req.session.user._id);
+    const likeData = { userId: likingUserId, liked: true };
+
+    //find post based on post id
+      Post.find({_id: postId}, (err, post) => {
+      if (err) {
+        throw err;
+      }
+    
+      // set likes as the likes object of the post
+      const likes = post[0].likes;
+
+      // if there are no likes, like the post
+      if (likes.length == 0) {
+        Post.updateOne({ _id: postId }, { $push: { likes: likeData } }, (err) => {
+          if (err) {
+            throw err;
+          }
+          res.json({ likes: post.likes.length });
+        });
+       }
+
+       // if there are likes, go through each one and if the user hasn't liked it, like it
+      likes.forEach(like => {
+          if (!(String(like.userId) == String(likingUserId)) || (String(like.userId) == String(likingUserId) && like.liked == false)) {
+              Post.updateOne({ _id: postId }, { $push: { likes: likeData } }, (err) => {
+                if (err) {
+                  throw err;
+                }
+                res.json({ likes: post.likes.length });
+              });
+            } 
+        })
+        
+      res.redirect("/posts");
+  
+    });
+
+  },
+  Comment: (req, res) => {
+    const ObjectId = require("mongodb").ObjectId;
+    const id = ObjectId(req.body.id);
+    const comment = req.body.comment;
+    Post.updateOne({ _id: id }, { $push: { comments: comment } }, (err) => {
+      if (err) {
+        throw err;
+      }
+      res.redirect("/posts")
+
     });
   },
 };
+
+
 
 module.exports = PostsController;

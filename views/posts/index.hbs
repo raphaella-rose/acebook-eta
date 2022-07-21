@@ -4,7 +4,7 @@
 </form>
 
 {{! Profile page link}}
-<a href="/profile/user">Profile Page</a>
+<a href="/profile/user/{{user.username}}">Profile Page</a>
 
 <h1>Timeline</h1>
 <ul class="posts">
@@ -12,21 +12,49 @@
     <li class="post">
       {{this.timestamp}}
       <br />
-      {{this.username}}
-      <br />
+      <div class="username">
+        <a href="/profile/{{this.username}}">{{this.username}}</a>
+      </div>
       {{this.message}}
+      <br>
+      {{#if this.image}}
+      <div class="image">
+        <input type="hidden" name="id" value={{this._id}} />
+        <img src={{this.image}}>
+      </div>
+      {{/if}}
+      <br>
       <form class="delete-post" action="/posts/delete" method="post">
         <input type="hidden" name="id" value={{this._id}} />
         <input type="submit" value="Delete" />
       </form>
-      <div>
-        <button
+
+      
+      <div class="likes">
+      <button
           class="likeButton"
           onclick="likeFunction('{{this.id}}')"
           type="button"
         >like-button</button>
+        
+        {{#if this.likes}}
         <div>Likes: <span class="likes" id="likes-{{this.id}}"></span></div>
+        {{/if}}
+     
+        </div>
+
+      <div class="comments">
+        Comments: {{#each comments}} 
+       <li id="post-comment"> {{this}} </li>
+          {{/each}} 
+        <form id="enter-comment" action="/posts/comment" method="post">
+          <input type="text" id="comment" name="comment" value="" />
+          <input type="hidden" name="id" value={{this._id}} />
+          <input type="submit" value="Comment">
+        </form>
       </div>
+       </li>
+
     </li>
   {{/each}}
 </ul>
