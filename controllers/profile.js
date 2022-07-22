@@ -31,6 +31,7 @@ const ProfileController = {
   },
 
   OtherUser: (req, res) => {
+    // console.log(req.sessions.user.username)
     // find the user's data in the database, return one object that matches
     User.findOne({ username: req.params.username }, (err, userData) => {
       if (err) {
@@ -46,7 +47,7 @@ const ProfileController = {
         if (err) {
           throw err;
         }
-
+        
         // pass user data object into view file
         res.render("profile/otherUserProfile", {
           user: userData,
