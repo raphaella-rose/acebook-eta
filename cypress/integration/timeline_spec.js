@@ -11,14 +11,14 @@ describe("Timeline", () => {
 
     // submit first post
     cy.visit("/posts");
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form").find('#message').type("First post");
     cy.get("#new-post-form").submit();
 
     // submit second post
     cy.visit("/posts");
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form").find('#message').type("Second post");
     cy.get("#new-post-form").submit();
@@ -34,7 +34,7 @@ describe("Timeline", () => {
      // sign up, sign in, and make post as different user
     signUpAndSignIn("Test", "User2")
 
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form")
       .find('#message')

@@ -10,7 +10,7 @@ describe("Authentication", () => {
     signUpAndSignIn("Test", "User");
 
     cy.url().should("include", "/posts");
-    cy.contains("a", "New post");
+    cy.contains("a", "Post a new recipe");
 
   });
 

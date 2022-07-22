@@ -10,7 +10,7 @@ describe("Other user profile page", () => {
     // use webhelper to sign up and sign in as a different user
     signUpAndSignIn("Test", "User2");
 
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form").find('#message').type("Look at my profile");
     cy.get("#new-post-form").submit();
@@ -32,7 +32,7 @@ describe("Other user profile page", () => {
     // use webhelper to sign up and sign in as a different user
     signUpAndSignIn("Test", "User2");
 
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form").find('#message').type("Show this message");
     cy.get("#new-post-form").submit();
@@ -44,7 +44,7 @@ describe("Other user profile page", () => {
     signUpAndSignIn("Test", "User1");
 
     // make another post as new user
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form").find('#message').type("Do not display");
     cy.get("#new-post-form").submit();
@@ -62,7 +62,7 @@ describe("Other user profile page", () => {
     // use webhelper to sign up and sign in as a different user
     signUpAndSignIn("Test", "User2");
 
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form").find('#message').type("Show this message");
     cy.get("#new-post-form").submit();
