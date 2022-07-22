@@ -8,8 +8,8 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link" aria-current="page" href="/posts">Home</a>
-        <a class="nav-link" href="#">{{user.username}}</a>
-        <a class="nav-link" href="#">Search</a>
+        <a class="nav-link" href="/">{{user.username}}</a>
+        <a class="nav-link" href="/search">Search</a>
         <form action="/sessions?_method=DELETE" method="POST">
          <input class="sign-out-nav nav-link" type="submit" value="Sign Out" />
         </form>
@@ -18,38 +18,123 @@
   </div>
 </nav>
 
-{{!-- displaying full name as title of the page --}}
-<div class="profile-picture"><img src={{user.profilePic}} /></div>
-<h1 class="fullname">{{user.firstName}} {{user.lastName}}</h1>
+<div class="container">
+
+  <div class="row">
+    <div class="col-6">
+      <div class="profile-picture"><img src={{user.profilePic}} /></div>
+       <h1 class="fullname">{{user.firstName}} {{user.lastName}}</h1>
+        <h2 class="heading mt-3">Personal Information</h2>
+      <div class="user-information-container mt-1">
+        <p class="username info"><strong>Username:</strong> {{user.username}}</p>
+        <p class="location info"><strong>Location:</strong> {{user.location}}</p>
+        <p class="birthday info"><strong>Date of Birth:</strong> {{birthday}}</p>
+        
+    </div>
+
+    </div>
 
 
-<h2 class="heading mt-3">Personal Information</h2>
-{{!-- other detailed info displayed in div --}}
-<div class="user-information-container mt-1">
-  <p class="username info"><strong>Username:</strong> {{user.username}}</p>
-  <p class="location info"><strong>Location:</strong> {{user.location}}</p>
-  <p class="birthday info"><strong>Date of Birth:</strong> {{birthday}}</p>
-</div>
-
-{{!-- posts only from this user displayed --}}
-{{#if posts}}
-<h3 class="profile-heading">Posts</h3>
-  <ul class="posts mt-5">
-    {{#each posts}}
+      <div class="col-6"> 
+       {{#if posts}}
+        <h3 class="profile-heading">Posts</h3>
+         <ul class="posts">
+  {{#each posts}}
     <li class="post">
-      <div class="timestamp-wrapper">
-      {{this.timestamp}}
+      <div class="container">
+        <div class="row mb-3">
+          <div class="col-6">
+             <div class="username-wrapper">
+              <a class="username-display" href="/profile/{{this.username}}">{{this.username}}</a>
+            </div>
+          </div>
+          <div class="col-6 mt-1">
+            <div class="timestamp-wrapper">
+              {{this.timestamp}}
+            </div>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="col-12">
+            {{#if this.image}}
+              <div class="image">
+               <input type="hidden" name="id" value={{this._id}} />
+                <img class="post-image" src={{this.image}}  />
+              </div>
+              {{/if}}
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12 text-container">
+            <div class="title-wrapper">
+              {{this.title}}
+             </div>
+      
+            <div class="message-wrapper">
+               {{this.message}}
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-6">
+            <div class="likes-wrapper">
+               {{#if this.likes}}
+                 <div class="likes likes-display">
+                    Likes: {{this.likes.length}}
+                 </div>
+                {{/if}}
+              </div>
+          </div>
+          <div class="col-6">
+            {{#if comments}}
+             <button class="show-comment-button" id="show-comments" onclick="showComments()">
+               Show Comments
+            </button>
+           {{/if}}
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-3 like-button">
+               <form class="like-button" action="/posts/like" method="post">
+              <input type="hidden" name="id" value={{this._id}} />
+              <input class="interact-post" type="submit" value="Like" />
+             </form> 
+          </div>
+         <div class="col-9">
+              <form id="enter-comment" action="/posts/comment" method="post">
+                   <input class="interact-input" type="text" id="comment" name="comment" value="" placeholder="Write a comment here..." />
+                   <input type="hidden" name="id" value={{this._id}} />
+                   <input class="interact-post" type="submit" value="Comment">
+                </form>
+         </div>
+         </div>
+         <div class="row">
+          <div class="col-12">
+             <div class="comment-display-wrapper comments d-none">
+               <ul>
+                 {{#each comments}} 
+                   <li class="comment" id="post-comment"> {{this}} </li>
+                 {{/each}} 
+               </ul> 
+              </div>
+          </div>
+        </div>
+        </div>
+    
+       </li>
+    </li>
+  {{/each}}
+</ul>
+        {{/if}}
       </div>
-      <div class="message-wrapper">
-      {{this.message}}
+       
       </div>
-      <div class="likes-wrapper">
-      {{#if this.likes}}
-      <div class="likes">Likes: {{this.likes.length}}</div>
-      {{/if}}
-      </div>
-      </li>
-    {{/each}}
-  </ul>
-{{/if}}
+
+    </div>
+
 </div>

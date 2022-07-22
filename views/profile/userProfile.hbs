@@ -19,7 +19,6 @@
 </nav>
 
 <div class="container">
-
   <div class="row">
     <div class="col-6">
       <div class="profile-picture"><img src={{user.profilePic}} /></div>
@@ -36,25 +35,109 @@
 
 
       <div class="col-6">
+        
        {{#if posts}}
         <h3 class="profile-heading">Posts</h3>
-          <ul class="posts mt-5">
-            {{#each posts}}
-            <li class="post">
-              <div class="timestamp-wrapper">
+         <ul class="posts">
+  {{#each posts}}
+    <li class="post">
+      <div class="container">
+          <div class="row mb-1">
+          <div class="col-12">
+             <form class="delete-post-form" action="/posts/delete" method="post">
+              <input type="hidden" name="id" value={{this._id}} />
+              <input class="delete-post" type="submit" value="X" />
+             </form>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-6">
+             <div class="username-wrapper">
+              <a class="username-display" href="/profile/{{this.username}}">{{this.username}}</a>
+            </div>
+          </div>
+          <div class="col-6 mt-1">
+            <div class="timestamp-wrapper">
               {{this.timestamp}}
+            </div>
+          </div>
+        </div>
+
+         <div class="row">
+          <div class="col-12">
+            {{#if this.image}}
+              <div class="image">
+               <input type="hidden" name="id" value={{this._id}} />
+                <img class="post-image" src={{this.image}}  />
               </div>
-              <div class="message-wrapper">
-              {{this.message}}
-              </div>
-              <div class="likes-wrapper">
-              {{#if this.likes}}
-              <div class="likes">Likes: {{this.likes.length}}</div>
               {{/if}}
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12 text-container">
+            <div class="title-wrapper">
+              {{this.title}}
+             </div>
+      
+            <div class="message-wrapper">
+               {{this.message}}
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-6">
+            <div class="likes-wrapper">
+               {{#if this.likes}}
+                 <div class="likes likes-display">
+                    Likes: {{this.likes.length}}
+                 </div>
+                {{/if}}
               </div>
-              </li>
-            {{/each}}
-          </ul>
+          </div>
+          <div class="col-6">
+            {{#if comments}}
+             <button class="show-comment-button" id="show-comments" onclick="showComments()">
+               Show Comments
+            </button>
+           {{/if}}
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-3 like-button">
+               <form class="like-button" action="/posts/like" method="post">
+              <input type="hidden" name="id" value={{this._id}} />
+              <input class="interact-post" type="submit" value="Like" />
+             </form> 
+          </div>
+         <div class="col-9">
+              <form id="enter-comment" action="/posts/comment" method="post">
+                   <input class="interact-input" type="text" id="comment" name="comment" value="" placeholder="Write a comment here..." />
+                   <input type="hidden" name="id" value={{this._id}} />
+                   <input class="interact-post" type="submit" value="Comment">
+                </form>
+         </div>
+         </div>
+         <div class="row">
+          <div class="col-12">
+             <div class="comment-display-wrapper comments d-none">
+               <ul>
+                 {{#each comments}} 
+                   <li class="comment" id="post-comment"> {{this}} </li>
+                 {{/each}} 
+               </ul> 
+              </div>
+          </div>
+        </div>
+        </div>
+    
+       </li>
+    </li>
+  {{/each}}
+</ul>
         {{/if}}
       </div>
        
@@ -62,22 +145,7 @@
 
     </div>
 
-
-    <div class="row">
-      <div class="col-6">
-         
-      </div>
-      
-    </div>
     
 
   </div>
   
-
-</div>
-
-
-
-
-
-</div>
