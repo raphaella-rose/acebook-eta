@@ -12,7 +12,7 @@ describe("Making a post", () => {
 
     // submit a post
     cy.visit("/posts");
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form")
       .find("#message")
@@ -40,7 +40,7 @@ describe("Making a post", () => {
     signUpAndSignIn("Test", "User")
 
     // make a post with a title
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
     cy.get("#new-post-form")
       .find("#post-title")
       .type("This post has a title");

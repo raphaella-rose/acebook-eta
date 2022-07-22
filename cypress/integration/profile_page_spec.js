@@ -10,7 +10,7 @@ describe("Profile Page", () => {
     signUpAndSignIn("Test", "User");
 
     // user clicks on link to 'Profile Page'
-    cy.contains("Profile Page").click();
+    cy.get(".navbar").contains("TestUser").click();
 
     // page contains the username
     cy.contains("Test User");
@@ -21,7 +21,7 @@ describe("Profile Page", () => {
     signUpAndSignIn("Test", "User");
 
     // user clicks on link to 'Profile Page'
-    cy.contains("Profile Page").click();
+    cy.get(".navbar").contains("TestUser").click();
 
     // test for information on profile page
     cy.contains("Test User");
@@ -33,7 +33,7 @@ describe("Profile Page", () => {
     // use webhelper to sign up and sign in as a different user
     signUpAndSignIn("Test", "User2");
 
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form").find('#message').type("Do not display");
     cy.get("#new-post-form").submit();
@@ -45,13 +45,13 @@ describe("Profile Page", () => {
     signUpAndSignIn("Test", "User1");
 
     // make another post as new user
-    cy.contains("New post").click();
+    cy.contains("Post a recipe").click();
 
     cy.get("#new-post-form").find('#message').type("Show this message");
     cy.get("#new-post-form").submit();
 
     // visit profile page and only see post made by current user
-    cy.contains("Profile Page").click();
+    cy.get(".navbar").contains("TestUser1").click();
     cy.url().should("include", "/profile/user");
     cy.get("ul").should(($post) => {
       expect($post).to.contain("Show this message");

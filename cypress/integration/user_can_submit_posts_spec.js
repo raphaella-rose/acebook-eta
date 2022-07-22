@@ -12,7 +12,7 @@ describe("Timeline", () => {
 
     // submit a post
     cy.visit("/posts");
-    cy.contains("New post").click();
+    cy.contains("Post a new recipe").click();
 
     cy.get("#new-post-form")
       .find("#message")
