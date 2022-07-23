@@ -20,7 +20,7 @@ describe("Delete Post", () => {
     // go to profile page
     cy.get(".navbar").contains("TestUser").click();
     // delete a post
-    cy.get("post").contains(".delete-post-form").first().submit();
+    cy.get(".post").first(".container").contains("#delete-post-form").submit();
 
     // assert that the page no longer shows the post
     cy.visit("/posts");
