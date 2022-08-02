@@ -46,7 +46,7 @@ const ProfileController = {
         if (err) {
           throw err;
         }
-
+        
         // pass user data object into view file
         res.render("profile/otherUserProfile", {
           user: userData,

@@ -6,7 +6,7 @@ Acebook is a Facebook-clone developed whilst on the Makers Academy Bootcamp July
 
 - A (full stack) web app that allows users to login to the social media platform
 - Users can interact with other users and profiles by the feed through posts, comments and likes
-- Build using Test Driven Development and working cohesively as a team
+- Build using Test Driven Development and working cohesively as a team.
 
 ## Group Collabrators (Alphabetical)
 

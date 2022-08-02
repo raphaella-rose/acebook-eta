@@ -48,13 +48,14 @@ const PostsController = {
     });
   },
   Delete: (req, res) => {
+    const username = req.session.user.username;
     const ObjectId = require("mongodb").ObjectId;
     const id = new ObjectId(req.body.id);
     Post.deleteOne({ _id: id }, (err) => {
       if (err) {
         throw err;
       }
-      res.redirect("/posts");
+      res.redirect(`/profile/user/${username}`);
     });
   },
   Like: (req, res) => {

@@ -1,12 +1,30 @@
-<div class="main-container text-center">
+<div class="body-container text-center">
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/posts">TasteBook</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" aria-current="page" href="/posts">Home</a>
+        {{!-- <a class="nav-link" href="#">{{user.username}}</a> --}}
+        <a class="nav-link" href="/search">Search</a>
+        <form action="/sessions?_method=DELETE" method="POST">
+         <input class="sign-out-nav nav-link" type="submit" value="Sign Out" />
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>
 
-<h2 class="title-h2">What's currently on your mind?</h2>
+<h2 class="title-h2">Share what you've been making</h2>
 
 <div class="form-container">
 <form id="new-post-form" action="/posts" method="post">
-  <label class="form-label" for="post-title">Enter your title here:</label> <br>
+  <label class="form-label" for="post-title">Enter recipe name here:</label> <br>
   <input class="form-input" id="post-title" type="text" name="title" value="" /> <br>
-  <label class="form-label" for="message">Enter your post message here: </label><br>
+  <label class="form-label" for="message">Enter your recipe here: </label><br>
   <textarea class="form-input" id="message" type="text" name="message" value="" rows="4" cols="70"></textarea><br>
   <p class="form-p">Add an image to your post</p>
   <label class="form-label" for="image-url">Enter your image url here:</label> <br>
